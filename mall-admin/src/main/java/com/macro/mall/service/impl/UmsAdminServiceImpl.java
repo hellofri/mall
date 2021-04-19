@@ -25,6 +25,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -58,6 +59,15 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     private UmsAdminLoginLogMapper loginLogMapper;
     @Autowired
     private UmsAdminCacheService adminCacheService;
+
+    public static void main(String[] args) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        String a = passwordEncoder.encode("admin");
+        System.out.println(a);
+        System.out.println(passwordEncoder.matches("macro123",
+                "$2a$10$.E1FokumK5GIXWgKlg.Hc.i/0/2.qdAwYFL1zc5QHdyzpXOr38RZO"));
+    }
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
